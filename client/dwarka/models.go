@@ -7,8 +7,15 @@ type Building struct {
 	Lan         float64 `json:"lan"`
 	Description string  `json:"description"`
 }
+
 type Floor struct {
 	Level       int    `json:"level"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+}
+
+type Room struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Direction   string `json:"direction"`
 }

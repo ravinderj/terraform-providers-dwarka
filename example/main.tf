@@ -19,16 +19,10 @@ resource "dwarka_floor" "secondfloor" {
   description = "created by terraform"
 }
 
-resource "dwarka_floor" "thirdfloor" {
+resource "dwarka_room" "room1" {
   building_id = dwarka_building.main.id
-  name        = "thirdfloor"
-  level       = 3
-  description = "created by terraform"
-}
-
-resource "dwarka_floor" "fourthfloor" {
-  building_id = dwarka_building.main.id
-  name        = "fourthfloor"
-  level       = 4
+  floor_id    = dwarka_floor.main.id
+  name        = "room1"
+  direction   = "north"
   description = "created by terraform"
 }
