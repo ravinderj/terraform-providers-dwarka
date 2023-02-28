@@ -2,6 +2,7 @@ package dwarka
 
 import (
 	"context"
+	"strings"
 	"time"
 
 	"terraform-provider-dwarka/client/dwarka"
@@ -80,12 +81,19 @@ func resourceRoomRead(ctx context.Context, d *schema.ResourceData, m interface{}
 	floorID := d.Get("floor_id").(string)
 	roomID := d.Id()
 
+	ids := strings.Split(roomID, ".")
+	if len(ids) == 3 {
+		buildingID = ids[0]
+		floorID = ids[1]
+		roomID = ids[2]
+	}
+
 	room, err := c.GetRoom(buildingID, floorID, roomID)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	//d.SetId(floorID)
+	d.SetId(roomID) // removing building.room from floorID (is this right to do?)
 	if err := d.Set("building_id", buildingID); err != nil {
 		return diag.FromErr(err)
 	}

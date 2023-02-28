@@ -1,28 +1,76 @@
-resource "dwarka_building" "main" {
-  name        = "terraform"
-  description = "created by terraform"
+resource "dwarka_building" "gryffindor" {
+  name        = "gryffindor"
+  description = "from terraform"
   lat         = 13.0827
   lan         = 80.2707
 }
 
-resource "dwarka_floor" "main" {
-  building_id = dwarka_building.main.id
-  name        = "terrace"
+resource "dwarka_floor" "gryffindor_ground" {
+  building_id = dwarka_building.gryffindor.id
+  name        = "ground_floor" // fix it in case of having space in the name "ground floor"
+  description = "from terraform"
   level       = 1
-  description = "created by terraform"
 }
 
-resource "dwarka_floor" "secondfloor" {
-  building_id = dwarka_building.main.id
-  name        = "secondfloor"
-  level       = 2
-  description = "created by terraform"
+resource "dwarka_room" "gryffindor_bedroom" {
+  building_id = dwarka_building.gryffindor.id
+  floor_id    = dwarka_floor.gryffindor_ground.id
+  name        = "bedroom"
+  description = "from terraform"
+  direction   = "south"
 }
 
-resource "dwarka_room" "room1" {
-  building_id = dwarka_building.main.id
-  floor_id    = dwarka_floor.main.id
-  name        = "room1"
-  direction   = "north"
-  description = "created by terraform"
+resource "dwarka_room" "gryffindor_hall" {
+  building_id = dwarka_building.gryffindor.id
+  floor_id    = dwarka_floor.gryffindor_ground.id
+  name        = "common_hall"
+  description = "from terraform"
+  direction   = "south"
+}
+
+resource "dwarka_room" "kitchen" {
+  building_id = dwarka_building.gryffindor.id
+  floor_id    = dwarka_floor.gryffindor_ground.id
+  name        = "kitchen"
+  description = "from terraform"
+  direction   = "south"
+}
+
+
+resource "dwarka_building" "slytherin" {
+  name        = "slytherin"
+  description = "from terraform"
+  lat         = 13.0827
+  lan         = 80.2707
+}
+
+resource "dwarka_floor" "slytherin_ground" {
+  building_id = dwarka_building.slytherin.id
+  name        = "ground_floor"
+  description = "from terraform"
+  level       = 1
+}
+
+resource "dwarka_room" "slytherin_bedroom" {
+  building_id = dwarka_building.slytherin.id
+  floor_id    = dwarka_floor.slytherin_ground.id
+  name        = "bedroom"
+  description = "from terraform"
+  direction   = "south"
+}
+
+resource "dwarka_room" "slytherin_hall" {
+  building_id = dwarka_building.slytherin.id
+  floor_id    = dwarka_floor.slytherin_ground.id
+  name        = "common_hall"
+  description = "from terraform"
+  direction   = "south"
+}
+
+resource "dwarka_room" "slytherin_kitchen" {
+  building_id = dwarka_building.slytherin.id
+  floor_id    = dwarka_floor.slytherin_ground.id
+  name        = "kitchen"
+  description = "from terraform"
+  direction   = "south"
 }

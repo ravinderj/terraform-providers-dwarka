@@ -2,6 +2,7 @@ package dwarka
 
 import (
 	"context"
+	"strings"
 	"time"
 
 	"terraform-provider-dwarka/client/dwarka"
@@ -74,12 +75,18 @@ func resourceFloorRead(ctx context.Context, d *schema.ResourceData, m interface{
 	buildingID := d.Get("building_id").(string)
 	floorID := d.Id()
 
+	ids := strings.Split(floorID, ".")
+	if len(ids) == 2 {
+		buildingID = ids[0]
+		floorID = ids[1]
+	}
+
 	floor, err := c.GetFloor(buildingID, floorID)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	//d.SetId(floorID)
+	d.SetId(floorID)
 	if err := d.Set("building_id", buildingID); err != nil {
 		return diag.FromErr(err)
 	}
