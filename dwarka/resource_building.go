@@ -2,8 +2,6 @@ package dwarka
 
 import (
 	"context"
-	"time"
-
 	"terraform-provider-dwarka/client/dwarka"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -110,10 +108,6 @@ func resourceBuildingUpdate(ctx context.Context, d *schema.ResourceData, m inter
 
 		_, err := c.UpdateBuilding(buildingID, building)
 		if err != nil {
-			return diag.FromErr(err)
-		}
-
-		if err := d.Set("last_updated", time.Now().Format(time.RFC850)); err != nil {
 			return diag.FromErr(err)
 		}
 	}
