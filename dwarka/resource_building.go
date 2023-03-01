@@ -2,8 +2,6 @@ package dwarka
 
 import (
 	"context"
-	"time"
-
 	"terraform-provider-dwarka/client/dwarka"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -111,8 +109,6 @@ func resourceBuildingUpdate(ctx context.Context, d *schema.ResourceData, m inter
 		if err != nil {
 			return diag.FromErr(err)
 		}
-
-		d.Set("last_updated", time.Now().Format(time.RFC850))
 	}
 
 	return resourceBuildingRead(ctx, d, m)
