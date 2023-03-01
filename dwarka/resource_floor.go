@@ -3,8 +3,6 @@ package dwarka
 import (
 	"context"
 	"strings"
-	"time"
-
 	"terraform-provider-dwarka/client/dwarka"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -129,9 +127,6 @@ func resourceFloorUpdate(ctx context.Context, d *schema.ResourceData, m interfac
 		}
 
 		if err := d.Set("building_id", buildingID); err != nil {
-			return diag.FromErr(err)
-		}
-		if err := d.Set("last_updated", time.Now().Format(time.RFC850)); err != nil {
 			return diag.FromErr(err)
 		}
 	}
