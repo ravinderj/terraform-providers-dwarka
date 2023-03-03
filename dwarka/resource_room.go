@@ -130,8 +130,6 @@ func resourceRoomUpdate(ctx context.Context, d *schema.ResourceData, m interface
 		if err != nil {
 			return diag.FromErr(err)
 		}
-
-		d.Set("last_updated", time.Now().Format(time.RFC850))
 	}
 
 	return resourceRoomRead(ctx, d, m)
